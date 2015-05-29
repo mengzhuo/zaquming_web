@@ -1,0 +1,17 @@
+% include header.tpl title=query_name
+% include search_form.tpl
+    % for word in words:
+    <div>
+        <a href="/w/{{word.name}}">{{word.name}}</a>
+        <ul>
+        % for trans in word.trans[:3]:
+        <li>{{trans.name}} -&gt; {{trans.area}}</li>
+        % end
+        </ul>
+    </div>
+    % end
+    
+    % include add_word_form.tpl
+
+
+%include("footer.tpl")

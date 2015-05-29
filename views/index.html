@@ -1,0 +1,11 @@
+% include header.tpl title=""
+<div id='index'>
+<form method='GET' action='/search'>
+<input value="{{get('query_name', "")}}" name="q" type='search' />
+<button type='submit'>取个变量名</button>
+</form>
+</div>
+
+<div id='recommand'>
+</div>
+% include('footer.tpl')
