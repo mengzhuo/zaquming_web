@@ -5,7 +5,7 @@
         <a href="/w/{{word.name}}">{{word.name}}</a>
         <ul>
         % for trans in word.trans[:3]:
-        <li>{{trans.name}} -&gt; {{trans.area}}</li>
+        <li>{{trans.name}} ({{trans.nominal}})</li>
         % end
         </ul>
     </div>

@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 # encoding: utf-8
+from gevent import monkey
+monkey.patch_all()
 
+import db
+db.init()
 from urllib import quote
 
 from plugins import logplugin
 
 from bottle import (route, run, view, HTTPError,
                     install, request, HTTPResponse)
-import db
-db.init()
 install(logplugin)
 
 from models import Word, TransLation
@@ -18,10 +20,13 @@ from mongoengine import DoesNotExist, NotUniqueError
 @route('/')
 @view('index.html')
 def index():
-    lastest_word = Word.objects.order_by('update_at')[0]
-    highest_word = Word.objects.order_by('rating')[0]
-    return dict(lastest_word=lastest_word,
-                highest_word=highest_word)
+    try:
+        lastest_word = Word.objects.order_by('update_at').get()
+        highest_word = Word.objects.order_by('rating').get()
+        return dict(lastest_word=lastest_word,
+                    highest_word=highest_word)
+    except DoesNotExist:
+        return {}
 
 
 @route('/w/<name>')
@@ -69,4 +74,4 @@ def search_word():
         raise HTTPError(400, "No params")
 
 if __name__ == '__main__':
-    run(host='0.0.0.0', port=5000, reloader=True, debug=True)
+    run(host='0.0.0.0', port=5000, server='gevent', reloader=True, debug=True)

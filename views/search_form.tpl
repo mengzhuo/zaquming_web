@@ -1,5 +1,5 @@
 <form method='get' action='/search' id='searchform'>
-<input value="{{get('query_name', "")}}" type='search' name='q' />
-<button type='submit'>搜一搜</button>
+<strong>咋取名&nbsp;</strong><input value="{{get('query_name', "")}}" type='search' name='q' />
+<button type='submit'>=</button>
 </form>
 <hr />
