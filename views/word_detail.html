@@ -1,6 +1,5 @@
 % include header.tpl title=word.name
 % include search_form.tpl
-        <a href="/w/{{word.name}}">{{word.name}}</a>
         <ul>
         % for trans in word.trans[:3]:
         <li>{{trans.name}}  ({{trans.nominal}})</li>

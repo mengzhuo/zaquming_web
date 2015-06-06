@@ -12,6 +12,7 @@ def logplugin(callback):
     def wrapper(*args, **kwargs):
         request_logger.info(request.params)
         body = callback(*args, **kwargs)
+        request_logger.info(body)
         return body
 
     return wrapper

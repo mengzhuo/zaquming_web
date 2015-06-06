@@ -1,12 +1,21 @@
 % include header.tpl title=""
 <div id='index'>
     <h3><span class="keyword" >#include</span> <a href="http://zaquming.com">&lt;咋取名.h&gt;</a></h3>
-<form method='GET' action='/search'>
+<form method='GET' action='/'>
 char <input placeholder="?" value="{{get('query_name', "")}}" name="q" type='search' />
 <button type='submit'>=</button>
 </form>
 </div>
-
-<div id='recommand'>
-</div>
+% for word in words:
+<dl class="words">
+    <dt >{{word.name}}</dt>
+    % for trans in word.trans:
+    % if trans.rating >= 0:
+        <dd title="{{trans.nominal}}">{{trans.name}}</dd>
+    % end
+    % end
+</dl>
+% end
+<hr/>
+% include('add_word_form.tpl')
 % include('footer.tpl')

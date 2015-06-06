@@ -11,7 +11,7 @@ from mongoengine import (DynamicDocument, DynamicEmbeddedDocument,
 class TransLation(DynamicEmbeddedDocument):
 
     name = StringField(max_length=128, unique=True)
-    rating = IntField(default=1)
+    rating = IntField(default=5)
     nominal = StringField(max_length=128, default=u'n.')
     level = StringField(max_length=128, default=u'student')
 
