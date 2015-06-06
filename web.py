@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from gevent import monkey, sleep
+from gevent import monkey, sleep, spawn, joinall
 monkey.patch_all()
 
 import db
@@ -85,5 +85,14 @@ def reset_vote():
         IP_VOTE = {} 
 
 if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
     
-    run(host='0.0.0.0', port=5000, server='gevent', reloader=False, debug=False)
+    parser.add_argument("port", type=int)
+    parser.add_argument("debug", type=bool)
+    args = parser.parse_args()
+    print args
+    joinall([spawn(reset_vote),
+             spawn( run, host='0.0.0.0', 
+                    port=args.port, server='gevent', 
+                    reloader=args.debug, debug=args.debug)])
