@@ -88,11 +88,12 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     
+    parser.add_argument("host")
     parser.add_argument("port", type=int)
     parser.add_argument("debug", type=bool)
     args = parser.parse_args()
     print args
     joinall([spawn(reset_vote),
-             spawn( run, host='0.0.0.0', 
+             spawn( run, host=args.host, 
                     port=args.port, server='gevent', 
                     reloader=args.debug, debug=args.debug)])
