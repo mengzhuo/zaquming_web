@@ -11,6 +11,7 @@ def logplugin(callback):
 
     def wrapper(*args, **kwargs):
         request_logger.info(request.params)
+        request.remote_addr = request.environ.get("X_FORWARDED_FOR", request.remote_addr)
         body = callback(*args, **kwargs)
         request_logger.info(body)
         return body
